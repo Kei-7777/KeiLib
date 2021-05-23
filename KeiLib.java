@@ -1,5 +1,20 @@
 public class KeiLib {
     /**
+     * Ez sender send message
+     * @param p target player
+     * @param s messages
+     */
+    public static void psm(org.bukkit.entity.Player p, String... s) {
+        java.util.Arrays.stream(s).forEach(p::sendMessage);
+    }
+    /**
+     * Random pick a online player
+     * @return pick an online player
+     */
+    public static org.bukkit.entity.Player p1p() {
+        return (org.bukkit.entity.Player) org.bukkit.Bukkit.getOnlinePlayers().toArray()[new java.util.Random().nextInt(org.bukkit.Bukkit.getOnlinePlayers().size())];
+    }
+    /**
      * Ez sender op check
      * @param sender CommandSender
      * @return op = true, not op = false
@@ -26,6 +41,13 @@ public class KeiLib {
      */
     public static void bc(String... str){
         java.util.Arrays.stream(str).forEach(org.bukkit.Bukkit::broadcastMessage);
+    }
+    /**
+     * Ez broadcast actionbar message
+     * @param str messages
+     */
+    public static void bac(String str){
+        org.bukkit.Bukkit.getOnlinePlayers().forEach(p -> p.sendActionBar(str));
     }
     /**
      * Ez args length check
