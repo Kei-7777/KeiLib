@@ -1,4 +1,59 @@
+package net.kunmc.lab.artforest;
 public class KeiLib {
+    /**
+     * Ez sender op check
+     * @param sender CommandSender
+     * @return op = true, not op = false
+     */
+    public static boolean pexc(org.bukkit.command.CommandSender sender) {
+        if(!sender.isOp()){
+            sender.sendMessage(org.bukkit.ChatColor.RED + "権限がありません。");
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /**
+     * Ez sender send message
+     * @param sender CommandSender
+     * @param str message
+     */
+    public static void sm(org.bukkit.command.CommandSender sender, String... str) {
+        java.util.Arrays.stream(str).forEach(sender::sendMessage);
+    }
+    /**
+     * Ez broadcast message
+     * @param str messages
+     */
+    public static void bc(String... str){
+        java.util.Arrays.stream(str).forEach(org.bukkit.Bukkit::broadcastMessage);
+    }
+    /**
+     * Ez args length check
+     * @param args command args
+     * @param lim limit elements
+     * @return true = length < lim
+     */
+    public static boolean agc(String[] args, int lim){
+        return args.length < lim;
+    }
+    /**
+     * Ez args element check
+     * @param args command args
+     * @param lim elements id
+     * @param cmd cmd name
+     * @return string equals
+     */
+    public static boolean agc(String[] args, int lim, String cmd){
+        return !agc(args, lim+1) && args[lim].equalsIgnoreCase(cmd);
+    }
+    /**
+     * System.out.println(str);
+     * @param str
+     */
+    public static void out(Object str){
+        System.out.println(str);
+    }
     /**
      * Get the server version from the JavaPlugin class.
      * @param plugin JavaPlugin class
@@ -127,5 +182,13 @@ public class KeiLib {
      */
     public static org.bukkit.block.Block a(org.bukkit.entity.Player p){
         return p.getLocation().getBlock().getRelative(org.bukkit.block.BlockFace.DOWN);
+    }
+    /**
+     * Set gamemode some players.
+     * @param players target players.
+     * @param gm gamemode.
+     */
+    public static void a(java.util.List<org.bukkit.entity.Player> players, org.bukkit.GameMode gm){
+        players.forEach(p -> p.setGameMode(gm));
     }
 }
