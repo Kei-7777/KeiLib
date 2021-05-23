@@ -1,4 +1,3 @@
-package net.kunmc.lab.artforest;
 public class KeiLib {
     /**
      * Ez sender op check
