@@ -8,6 +8,7 @@
 
 ## Tech
 
+Player Send Message  
 KeiLib#psm(org.bukkit.entity.Player p, String... s);
 ```java
 KeiLib.psm(player, "message1", "message2", "message3");
