@@ -17,3 +17,20 @@ KeiLib.psm(player, "message1", "message2", "message3");
  第２引数以降は複数引数を指定可能です。  
 第２引数以降は別のStringとしてメッセージ送信の処理を行います。  
 >(内部処理stream -> forEach)  
+
+Random pick a online player  
+KeiLib#p1p();  
+```java
+org.bukkit.entity.Player player = KeiLib.p1p();
+```
+> サーバーにいるプレイヤーからランダムで一人を取得します。  
+
+sender Permission check  
+KeiLib#pexc(org.bukkit.command.CommandSender sender);  
+```java
+// OnCommand (CommandExecutor)
+if(KeiLib.pexc(sender)) return true; // OP以外を弾く
+```
+> CommandSenderがOP以外のときにtrueを返します。  
+"権限がありません"のメッセージも追加で送信します。  
+> コマンドの処理でOP以外を弾く際にメッセージを同時に送信するのがめんどくさいため作成。  
