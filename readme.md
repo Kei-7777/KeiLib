@@ -12,7 +12,7 @@ KeiLib#psm(org.bukkit.entity.Player p, String... s);
 ```java
 KeiLib.psm(player, "message1", "message2", "message3");
 ```
-メッセージをプレイヤーに表示します。
+>メッセージをプレイヤーに表示します。
 第２引数以降は複数引数を指定可能です。
 第２引数以降は別のStringとしてメッセージ送信の処理を行います。
-(内部処理stream -> forEach)
+>(内部処理stream -> forEach)
