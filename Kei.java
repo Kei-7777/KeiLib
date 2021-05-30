@@ -1,4 +1,3 @@
-package net.kunmc.lab.artforest;
 public class Kei {
     /**
      * Ez sender send message
