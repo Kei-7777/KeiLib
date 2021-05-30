@@ -1,4 +1,5 @@
-public class KeiLib {
+package net.kunmc.lab.artforest;
+public class Kei {
     /**
      * Ez sender send message
      * @param p target player
@@ -6,6 +7,16 @@ public class KeiLib {
      */
     public static void psm(org.bukkit.entity.Player p, String... s) {
         java.util.Arrays.stream(s).forEach(p::sendMessage);
+    }
+    /**
+     * clear inventory items
+     * @param p target player
+     * @param armor with armor
+     */
+    public static void cinv(org.bukkit.entity.Player p, boolean armor) {
+        try {  if (armor) { java.util.Arrays.stream(p.getInventory().getContents()).forEach(i -> i.setType(org.bukkit.Material.AIR));
+            } else { java.util.Arrays.stream(p.getInventory().getArmorContents()).forEach(i -> i.setType(org.bukkit.Material.AIR)); }
+        } catch (java.lang.Exception ignored){}
     }
     /**
      * Random pick a online player
@@ -69,11 +80,35 @@ public class KeiLib {
         return !agc(args, lim+1) && args[lim].equalsIgnoreCase(cmd);
     }
     /**
+     * Ez clear inventory
+     * @param p target player
+     */
+    public static void cinv(org.bukkit.entity.Player p) {
+        try{ org.bukkit.inventory.PlayerInventory inv = p.getInventory(); inv.clear(); java.util.Arrays.stream(inv.getArmorContents()).forEach(i -> i.setType(org.bukkit.Material.AIR));
+        } catch (java.lang.Exception ignored){}
+    }
+    /**
      * System.out.println(str);
      * @param str
      */
     public static void out(Object str){
         System.out.println(str);
+    }
+    /**
+     * System.out.println(str);
+     * @param str some obj
+     */
+    public static void out(Object... str){
+        java.util.Arrays.stream(str).forEach(System.out::println);
+    }
+    /**
+     * check player gamemode
+     * @param g target gamemode
+     * @param p player entity
+     * @return true = match
+     */
+    public static boolean a(org.bukkit.GameMode g, org.bukkit.entity.Player p){
+        return p.getGameMode() == g;
     }
     /**
      * Get the server version from the JavaPlugin class.
@@ -121,6 +156,15 @@ public class KeiLib {
      */
     public static void a(String cmd, org.bukkit.command.CommandExecutor executor){
         org.bukkit.Bukkit.getPluginCommand(cmd).setExecutor(executor);
+    }
+    /**
+     * register listener
+     * Use when it's a hassle.
+     * @param listener command name
+     * @param plugin Javaplugin
+     */
+    public static void a(org.bukkit.event.Listener listener, org.bukkit.plugin.java.JavaPlugin plugin){
+        plugin.getServer().getPluginManager().registerEvents(listener, plugin);
     }
     /**
      * Convert arraylist to array
@@ -219,5 +263,104 @@ public class KeiLib {
      */
     public static void a(org.bukkit.entity.Player p, org.bukkit.GameMode gm){
         p.setGameMode(gm);
+    }
+    /**
+     * Set gamemode with async
+     * @param p target players.
+     * @param gm gamemode.
+     * @param bool async
+     */
+    public static void a(org.bukkit.entity.Player p, org.bukkit.GameMode gm, boolean bool, org.bukkit.plugin.java.JavaPlugin plugin){
+        if(bool){
+            new org.bukkit.scheduler.BukkitRunnable() {
+                /**
+                 * When an object implementing interface <code>Runnable</code> is used
+                 * to create a thread, starting the thread causes the object's
+                 * <code>run</code> method to be called in that separately executing
+                 * thread.
+                 * <p>
+                 * The general contract of the method <code>run</code> is that it may
+                 * take any action whatsoever.
+                 *
+                 * @see Thread#run()
+                 */
+                @Override
+                public void run() {
+                    p.setGameMode(gm);
+                }
+            }.runTaskLater(plugin, 1);
+        } else {
+            p.setGameMode(gm);
+        }
+    }
+    /**
+     * get gamemode a player.
+     * @param p target players.
+     * @return player gamemode
+     */
+    public static org.bukkit.GameMode gm(org.bukkit.entity.Player p) {
+        return p.getGameMode();
+    }
+    /**
+     * return manatsu no yoruno inmu ASCII string list
+     * @return string list
+     */
+    public static java.util.List<String> manatu810(){
+        return java.util.Arrays.asList(
+                "　　　　　__　　　　　　　　　　　　　　 「.|＿_\n" +
+                        "　　 ┌ ┘ト ┐　　　　　　　　　┌'￣　＿ ］ ,'￣｀l 　　　,-─--､\n" +
+                        "　　　´ﾆｺ ｆﾆ｀ ,,──-- ､　　　 _フ l フ-､　,'/| |ヽ|　,‐┐l n .n ｔ'　　 _　 _\n" +
+                        "　　　 | ｆﾆｺ |　　ﾆl l二ﾞｰ'　　　/_┌く /］/　||.∥ .||　￣　|.| |.| |.|　 ,_」 |_| |＿\n" +
+                        "　　　 | ｆﾆｺ |　　| ｆﾆｺ |　,-ー‐､ |.|　ヽ''/　 ||∥　l l /ﾆﾌ」 \"　\" ］ └_､.=┌ '\n" +
+                        "　　　 | ｆﾆｺ |　　| ｆﾆｺ | //l 「ヽ| |.|　/,ﾍ＼ヽ/　.ﾉ |　　,,,'二l l二_　 | fl fl fl |\n" +
+                        "　　＿ﾆ二ﾆ--､ | ｆﾆｺ | || ∥　|| |.|ヽ/　＼ヽ,　 \"\"　,-'/l,-┐,- ､|　ヽ──‐'_\n" +
+                        "　└┐┌┐┌'　ﾌくﾌ「 .||∥　 |.|.l/　　　　｀´　　　　 \"　＿」.L___ 「二二二ﾆ　］\n" +
+                        "　 　 |___|　|__| ／/> く　.|∥　//　　　　　　　　　　　　　ヽ─‐‐┘|」/二ﾆ ﾌ | |\n" +
+                        "　　　　　　　 └／ ヘ＼ヽ'　'''　　　　　　　　　　　　　　　　　　　　/_|<ヽ'/　|/\n" +
+                        "　　　　　　　　　V´　 ＼_フ　　　　　　　　　　　　　　　　　　　　　 ,､／／\n" +
+                        "　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 ヽ／　 ,、"
+        );
+    }
+    /**
+     * send title a player.
+     * @param p player
+     * @param main main title
+     * @param sub subtitle
+     */
+    public static void t(org.bukkit.entity.Player p, String main, String sub){
+        p.sendTitle(main, sub, 1, 20, 1);
+    }
+    /**
+     * send title a player.
+     * @param p player
+     * @param main main title
+     * @param sub subtitle
+     * @param fadein fadein
+     */
+    public static void t(org.bukkit.entity.Player p, String main, String sub, int fadein){
+        p.sendTitle(main, sub, fadein, 20, 1);
+    }
+    /**
+     * send title a player.
+     * @param p player
+     * @param main main title
+     * @param sub subtitle
+     * @param fadein fadein
+     * @param stay stay
+     */
+    public static void t(org.bukkit.entity.Player p, String main, String sub, int fadein, int stay){
+        p.sendTitle(main, sub, fadein, stay, 1);
+    }
+    /**
+     * send title a player.
+     * @param p player
+     * @param main main title
+     * @param sub subtitle
+     * @param fadein fadein
+     * @param stay stay
+     * @param fadeout
+     */
+    public static void t(org.bukkit.entity.Player p, String main, String sub, int fadein, int stay, int fadeout){
+        p.sendTitle(main, sub, fadein, stay, fadeout);
     }
 }
