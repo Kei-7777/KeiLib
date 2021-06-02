@@ -14,7 +14,7 @@ public class Kei {
      */
     public static void cinv(org.bukkit.entity.Player p, boolean armor) {
         try {  if (armor) { java.util.Arrays.stream(p.getInventory().getContents()).forEach(i -> i.setType(org.bukkit.Material.AIR));
-            } else { java.util.Arrays.stream(p.getInventory().getArmorContents()).forEach(i -> i.setType(org.bukkit.Material.AIR)); }
+        } else { java.util.Arrays.stream(p.getInventory().getArmorContents()).forEach(i -> i.setType(org.bukkit.Material.AIR)); }
         } catch (java.lang.Exception ignored){}
     }
     /**
@@ -211,8 +211,19 @@ public class Kei {
      * @param a base string (req english w/ uppercase)
      * @return convert morse code string
      */
-    public static String a(String a){
-        return a.replaceAll("A", "・－")
+    public static String a(String a) {
+        String r = a.toUpperCase();
+        StringBuffer buf = new StringBuffer();
+        for (int i = 0; i < r.length(); i++) {
+            char code = r.charAt(i);
+            if ((code >= 0x3041) && (code <= 0x3093)) {
+                buf.append((char) (code + 0x60));
+            } else {
+                buf.append(code);
+            }
+        }
+        r = buf.toString();
+        return r.replaceAll("A", "・－")
                 .replaceAll("B", "－・・・")
                 .replaceAll("C", "－・－・")
                 .replaceAll("D", "－・・")
@@ -237,7 +248,87 @@ public class Kei {
                 .replaceAll("W", "・－－")
                 .replaceAll("X", "－・・－")
                 .replaceAll("Y", "－・－－")
-                .replaceAll("Z", "－－・・");
+                .replaceAll("Z", "－－・・")
+                .replaceAll("1",  "・－－－－")
+                .replaceAll("2", "・・－－－")
+                .replaceAll("3", "・・・－－")
+                .replaceAll("4", "・・・・－")
+                .replaceAll("5", "・・・・・")
+                .replaceAll("6", "－・・・・")
+                .replaceAll("7", "－－・・・")
+                .replaceAll("8", "－－－・・")
+                .replaceAll("9", "－－－－・")
+                .replaceAll("0", "－－－－－")
+                .replaceAll("\\.", "・－・－・－")
+                .replaceAll(",", "－－・・－－")
+                .replaceAll(":", "－－－・・・")
+                .replaceAll("\\?", "・・－－・・")
+                .replaceAll("？", "・・－－・・")
+                .replaceAll("’", "・－－－－・")
+                .replaceAll("-", "－・・・・－")
+                .replaceAll("ー", "－・・・・－")
+                .replaceAll("\\(", "－・－－・")
+                .replaceAll("（", "－・－－・")
+                .replaceAll("\\)", "－・－－・－")
+                .replaceAll("）", "－・－－・－")
+                .replaceAll("/", "－・・－・")
+                .replaceAll("／", "－・・－・")
+                .replaceAll("=", "－・・・－")
+                .replaceAll("＝", "－・・・－")
+                .replaceAll("\\+", "・－・－・")
+                .replaceAll("＋", "・－・－・")
+                .replaceAll("\"", "・－・・－・")
+                .replaceAll("\\*", "－・・－")
+                .replaceAll("@", "・－－・－・")
+                .replaceAll("＠", "・－－・－・")
+                .replaceAll("ア", "－－・－－")
+                .replaceAll("イ", "・－")
+                .replaceAll("ウ", "・・－")
+                .replaceAll("エ", "－・－－－")
+                .replaceAll("オ", "・－・・・")
+                .replaceAll("カ", "・－・・")
+                .replaceAll("キ", "－・－・・")
+                .replaceAll("ク", "・・・－")
+                .replaceAll("ケ", "－・－－")
+                .replaceAll("コ", "－－－－")
+                .replaceAll("サ", "－・－・－")
+                .replaceAll("シ", "－－・－・")
+                .replaceAll("ス", "－－－・－")
+                .replaceAll("セ", "・－－－・")
+                .replaceAll("ソ", "－－－・")
+                .replaceAll("タ", "－・")
+                .replaceAll("チ", "・・－・")
+                .replaceAll("ツ", "・－－・")
+                .replaceAll("テ", "・－・－－")
+                .replaceAll("ト", "・・－・・")
+                .replaceAll("ナ","・－・")
+                .replaceAll("ニ", "－・－・")
+                .replaceAll("ヌ", "・・・・")
+                .replaceAll("ネ", "－－・－")
+                .replaceAll("ノ", "・・－－")
+                .replaceAll("ハ", "－・・・")
+                .replaceAll("ヒ", "－－・・－")
+                .replaceAll("フ", "－－・・")
+                .replaceAll("ヘ", "・")
+                .replaceAll("ホ", "－・・")
+                .replaceAll("マ", "－・・－")
+                .replaceAll("ミ", "・・－・－")
+                .replaceAll("ム", "－")
+                .replaceAll("メ", "－・・・－")
+                .replaceAll("モ", "－・・－・")
+                .replaceAll("ヤ", "・－－")
+                .replaceAll("ユ", "－・・－－")
+                .replaceAll("ヨ", "－－")
+                .replaceAll("ラ", "・・・")
+                .replaceAll("リ", "－－・")
+                .replaceAll("ル", "－・－－・")
+                .replaceAll("レ", "－－－")
+                .replaceAll("ロ", "・－・－")
+                .replaceAll("ワ", "－・－")
+                .replaceAll("ヰ", "・－・・－")
+                .replaceAll("ヲ", "・－－－")
+                .replaceAll("ヱ", "・－－・・")
+                .replaceAll("ン", "・－・－・");
     }
     /**
      * Get the blocks under your feet.
